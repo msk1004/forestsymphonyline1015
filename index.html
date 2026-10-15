@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LINE運用・投稿サポートのご提案</title>
+<style>
+:root{
+  --ink:#1b2a20; --sub:#4d5f52; --line:#d6e2d3;
+  --g700:#2a6b3e; --g600:#2e7a45; --g500:#56a764; --g300:#a9d3a8;
+  --g100:#e6f2e3; --g50:#f2f6ef; --lime:#a0c238; --aqua:#cfe9e2;
+  --paper:#ffffff; --warn:#b4531c; --warnbg:#fbeee3;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--g50);color:var(--ink);
+  font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic UI","Meiryo",sans-serif;
+  font-size:16px;line-height:1.85;letter-spacing:.02em;
+  word-break:auto-phrase;line-break:strict;overflow-wrap:anywhere}
+h1,h2,h3,h4{margin:0;line-height:1.5;font-weight:700;text-wrap:balance}
+p{margin:0 0 1em;text-wrap:pretty}
+img{max-width:100%;height:auto;display:block}
+.nb{white-space:nowrap}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+/* hero */
+.hero{background:linear-gradient(135deg,#e3f3e0 0%,#cfe9e2 55%,#e7f4d4 100%);
+  padding:56px 0 64px;border-bottom:4px solid var(--g500)}
+.hero .logo{width:119px;height:auto;background:#fff;padding:8px 12px;border-radius:8px;margin-bottom:32px}
+.hero .kicker{display:inline-block;background:var(--g600);color:#fff;font-size:13px;
+  padding:4px 14px;border-radius:99px;letter-spacing:.08em;margin-bottom:16px}
+.hero h1{font-size:clamp(26px,4.6vw,42px);color:var(--g700);margin-bottom:16px}
+.hero .lead{font-size:clamp(16px,2vw,19px);max-width:34em;margin-bottom:28px}
+.hero dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 18px;margin:0;font-size:14px}
+.hero dt{color:var(--sub)} .hero dd{margin:0}
+
+/* nav */
+.toc{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.toc ul{list-style:none;margin:0;padding:10px 0;display:flex;gap:6px 18px;flex-wrap:wrap;font-size:13px}
+.toc a{color:var(--g700);text-decoration:none;white-space:nowrap}
+.toc a:hover{text-decoration:underline}
+
+/* sections */
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+section:nth-of-type(even){background:#fff}
+.sec-no{font-size:13px;color:var(--g500);letter-spacing:.2em;font-weight:700}
+.sec-h{font-size:clamp(22px,3.2vw,30px);color:var(--g700);margin:4px 0 8px}
+.sec-lead{color:var(--sub);max-width:42em;margin-bottom:28px}
+h3{font-size:19px;color:var(--g700);margin:32px 0 12px;padding-left:12px;border-left:5px solid var(--g500)}
+h4{font-size:16px;margin:0 0 6px;color:var(--g700)}
+
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px}
+section:nth-of-type(even) .card{background:var(--g50)}
+.card.accent{border-top:5px solid var(--g500)}
+.card .num{font-size:30px;font-weight:700;color:var(--g600);line-height:1.2}
+.card .cap{font-size:13px;color:var(--sub)}
+
+.note{background:var(--g100);border-left:5px solid var(--g500);border-radius:6px;padding:14px 18px;font-size:14.5px;margin:20px 0}
+.warn{background:var(--warnbg);border-left-color:var(--warn)}
+.small{font-size:13px;color:var(--sub)}
+
+/* products: 画像は縦横比固定・トリミング無し */
+.prod{display:flex;flex-direction:column;gap:12px}
+.prod .ph{background:var(--g50);border:1px solid var(--line);border-radius:8px;
+  padding:14px;display:flex;align-items:center;justify-content:center;min-height:180px}
+.prod .ph img{width:auto;height:auto;max-width:100%;max-height:260px;object-fit:contain}
+.prod p{margin:0;font-size:14.5px}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;margin:12px 0 20px;border:1px solid var(--line);border-radius:10px;background:#fff}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px}
+th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--g100);color:var(--g700);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right;white-space:nowrap}
+.tag{display:inline-block;font-size:12px;padding:1px 10px;border-radius:99px;background:var(--g100);color:var(--g700);margin:2px 4px 2px 0;white-space:nowrap}
+.tag.hi{background:var(--g600);color:#fff}
+
+/* flow */
+.flow{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));counter-reset:s}
+.flow .st{background:#fff;border:1px solid var(--line);border-top:5px solid var(--g500);border-radius:10px;padding:14px 14px 16px;counter-increment:s}
+.flow .st::before{content:"STEP " counter(s);display:block;font-size:12px;color:var(--g500);font-weight:700;letter-spacing:.1em}
+.flow .st b{display:block;margin:2px 0 6px;color:var(--g700)}
+.flow .st span{font-size:13.5px;color:var(--sub);display:block}
+.tl .st::before{content:attr(data-t)}
+
+/* LINE画面イメージ（装飾のみ・画像加工なし） */
+.phones{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.phone{background:#cfe0d3;border-radius:22px;padding:16px;border:6px solid #3a4a3f;max-width:340px}
+.phone .bar{font-size:12px;text-align:center;color:#3a4a3f;margin-bottom:10px}
+.bubble{background:#fff;border-radius:14px;padding:12px;font-size:13.5px;line-height:1.7;margin-bottom:10px}
+.bubble .img{background:linear-gradient(135deg,#dff0e0,#cfe9e2);border:1px dashed var(--g500);
+  border-radius:8px;min-height:120px;display:flex;align-items:center;justify-content:center;
+  text-align:center;font-size:13px;color:var(--g700);padding:10px;margin-bottom:8px}
+.rm{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:6px}
+.rm div{background:var(--g600);color:#fff;border-radius:6px;font-size:12px;padding:10px 4px;text-align:center;line-height:1.4}
+
+.price td:last-child,.price th:last-child{text-align:right;white-space:nowrap}
+.total td{font-weight:700;background:var(--g100)}
+
+.lstep th:first-child{width:11em}
+footer{background:var(--g700);color:#e8f3e6;padding:36px 0;font-size:14px}
+footer b{color:#fff}
+@media (max-width:600px){
+  .hero{padding:36px 0 44px} section{padding:40px 0}
+  .hero dl{grid-template-columns:1fr}
+}
+@media print{.toc{display:none}section{break-inside:avoid-page}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="logo" src="img/logo.webp" alt="Forest Symphony ロゴ" width="119" height="75">
+    <span class="kicker">LINE公式アカウント 運用・投稿サポート</span>
+    <h1>新商品リリースを、<br>「届く告知」にするためのLINE運用ご提案</h1>
+    <p class="lead">配信テキストの案出し・作成と画像制作を軸に、<br>Lステップでのタグ設計まで見据えた運用イメージをご用意しました。</p>
+    <dl>
+      <dt>ご提案先</dt><dd>株式会社フォレストシンフォニー 御中</dd>
+      <dt>ご提案日</dt><dd>2026年10月15日</dd>
+      <dt>ご提案元</dt><dd>株式会社新東通信 エステティック通信チーム</dd>
+    </dl>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap"><ul>
+  <li><a href="#s1">01 ご提案の要点</a></li>
+  <li><a href="#s2">02 貴社の強み</a></li>
+  <li><a href="#s3">03 LINEの現状整理</a></li>
+  <li><a href="#s4">04 BtoB LINEのノウハウ</a></li>
+  <li><a href="#s5">05 照らし合わせ</a></li>
+  <li><a href="#s6">06 新商品告知の型</a></li>
+  <li><a href="#s7">07 画像制作の方針</a></li>
+  <li><a href="#s8">08 お見積り（仮）</a></li>
+  <li><a href="#s9">09 運用コンサルのイメージ</a></li>
+  <li><a href="#s10">10 進め方</a></li>
+</ul></div></nav>
+
+<main>
+
+<section id="s1">
+  <div class="wrap">
+    <div class="sec-no">01</div>
+    <h2 class="sec-h">ご提案の要点</h2>
+    <p class="sec-lead">貴社のLINE公式アカウントは、約2年にわたり<span class="nb">継続的</span>に配信されており、<br>セミナー・展示会・導入事例と、素材もすでに豊富です。<br>この資産を、新商品の告知で「より届く形」にすることをご提案します。</p>
+    <div class="grid g3">
+      <div class="card accent"><h4>① 新商品告知のテキストを設計する</h4><p>予告から事例紹介まで、リリース前後の流れで<br>文面を案出し・作成します。</p></div>
+      <div class="card accent"><h4>② タップされる画像を制作する</h4><p>ご提供いただく素材を活かし、<br>1通1訴求で読みやすい画像に仕上げます。</p></div>
+      <div class="card accent"><h4>③ Lステップで仕組み化する</h4><p>興味・検討段階をタグで把握し、<br>反応に応じた配信へつなげる設計を行います。</p></div>
+    </div>
+    <div class="note">本書の3章・5章は、お預かりした<b>LINE配信履歴（2024年11月〜2026年10月）の文面のみ</b>をもとにした整理です。画像そのものは拝見できていないため、画像に関する記述は文面からの推定を含みます。</div>
+  </div>
+</section>
+
+<section id="s2">
+  <div class="wrap">
+    <div class="sec-no">02</div>
+    <h2 class="sec-h">フォレストシンフォニー様の強み</h2>
+    <p class="sec-lead">「機器を売って終わり」ではなく、開業から経営までを支える総合美容商社であることが、<br>LINEで発信できる話題の幅の広さにつながっています。</p>
+
+    <div class="grid g3">
+      <div class="card"><div class="num">10,000<span class="nb">店舗以上</span></div><div class="cap">全国のサロン取引実績</div></div>
+      <div class="card"><div class="num">2002年</div><div class="cap">設立。大阪本社・東京支社の2拠点</div></div>
+      <div class="card"><div class="num">3年連続</div><div class="cap">ピグメンテーションデトックスⅡ ベストアイテム殿堂入り（2023〜2025年）</div></div>
+    </div>
+
+    <h3>事業の柱</h3>
+    <div class="grid g2">
+      <div class="card"><h4>機器・化粧品の卸売と自社ブランド</h4><p>美容機器の卸売に加え、オリジナル化粧品の製造販売を展開。<span class="nb">3製品</span>がモンドセレクションを受賞しています。</p></div>
+      <div class="card"><h4>スクール・開業支援・FC</h4><p>エステティックスクール、サロン開業コンサルティング、シミケア専門店「Alice」のFC展開まで一気通貫で支援しています。</p></div>
+    </div>
+
+    <h3>主な取扱製品（公式サイトより）</h3>
+    <div class="grid g3">
+      <div class="card prod"><div class="ph"><img src="img/banner_pig.webp" alt="ピグメンテーションデトックスⅡ" width="300" height="300"></div><div><h4>ピグメンテーションデトックスⅡ</h4><p>看板のシミケア機器。LINEでも配信の中心となっている製品です。</p></div></div>
+      <div class="card prod"><div class="ph"><img src="img/products06.webp" alt="スリムリフトプロ" width="271" height="215"></div><div><h4>スリムリフトプロ</h4><p>頭皮からボディまで対応する業務用美顔器。</p></div></div>
+      <div class="card prod"><div class="ph"><img src="img/products04.webp" alt="フォトボディミニ" width="271" height="260"></div><div><h4>フォトボディミニ</h4><p>ベストアイテム2025を受賞した業務用脱毛器のシリーズ。</p></div></div>
+      <div class="card prod"><div class="ph"><img src="img/products07.webp" alt="業務用冷却美容機器" width="271" height="225"></div><div><h4>業務用冷却美容機器</h4><p>展示会でも話題の脂肪冷却機器。</p></div></div>
+      <div class="card prod"><div class="ph"><img src="img/products11.webp" alt="ホワイトフラッフィー" width="271" height="181"></div><div><h4>ホワイトフラッフィー</h4><p>濃密泡で施術する業務用化粧品。展示会でも訴求されています。</p></div></div>
+      <div class="card prod"><div class="ph"><img src="img/products12.webp" alt="マイクロニードルセラム" width="325" height="199"></div><div><h4>マイクロニードルセラム®</h4><p>特許取得の取扱製品。</p></div></div>
+    </div>
+
+    <h3>今回の「新商品」想定：Rene Pur（ルネピュール）</h3>
+    <div class="grid g2">
+      <div class="prod"><div class="ph"><img src="img/banner_rune.webp" alt="次世代水光機器 Rene Pur バナー" width="1080" height="540" style="max-height:none"></div></div>
+      <div class="card"><p>2026年5月のBWJ東京で先行お披露目された、エアインジェクション方式の次世代水光機器です。LINEでは5月・7月・10月に告知されており、<b>今後の新商品リリース告知の「型」を作る</b>題材として最適と考えています。</p><p class="small">※ 製品仕様・訴求表現は、貴社資料に基づき確認のうえ使用します。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="wrap">
+    <div class="sec-no">03</div>
+    <h2 class="sec-h">LINE配信の現状整理</h2>
+    <p class="sec-lead">トーク履歴から、配信の頻度・内容・導線を整理しました。<br>素材は豊富で、土台はすでにしっかりしています。</p>
+
+    <div class="grid g3">
+      <div class="card"><div class="num">136<span class="nb">日</span></div><div class="cap">配信があった日数（2024年11月〜2026年10月・約23か月）</div></div>
+      <div class="card"><div class="num">約7<span class="nb">回／月</span></div><div class="cap">直近12か月（2025年10月〜2026年9月）の平均。ほぼ週2回ペース</div></div>
+      <div class="card"><div class="num">20:00</div><div class="cap">配信時刻はほぼ固定（一部18:00）。営業後の時間帯に定着</div></div>
+    </div>
+
+    <h3>配信内容の傾向</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>カテゴリ</th><th>主な内容</th><th>配信の様子</th></tr></thead>
+      <tbody>
+        <tr><td>セミナー・説明会</td><td>開業セミナー、シミケアWEB説明会、美容医療対策セミナー</td><td>最も配信数が多い。同一文面を日程更新しながら繰り返し配信</td></tr>
+        <tr><td>展示会（BWJ）</td><td>体験予約、見どころ、カウントダウン、当日レポート、来場御礼</td><td>「あと4日」「あと3日」など、開催前後で連続配信</td></tr>
+        <tr><td>導入事例・お客様の声</td><td>オーナーのコメント（年代付き）、インタビュー動画、コラム</td><td>数値や具体的な声があり、信頼づくりに有効</td></tr>
+        <tr><td>機器の訴求</td><td>強みの比較、導入プラン（初期費用0円・月額3万円〜）、機器選びの3ポイント</td><td>自社LPへUTM付きURLで誘導し、計測の土台あり</td></tr>
+        <tr><td>新機器の告知</td><td>ルネピュール（5月・7月・10月）</td><td>配信回数は他カテゴリより少なめ</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>すでに実践されている良い点</h3>
+    <div class="grid g2">
+      <div class="card"><h4>開催前後の連続配信</h4><p>展示会の予約受付から当日レポートまで、時系列で情報を出されています。BtoBイベントの王道パターンです。</p></div>
+      <div class="card"><h4>画像タップ型の導線</h4><p>「画像をタップ」と誘導し、1通につき<span class="nb">1つ</span>の行き先に絞る配信が多く見られます。</p></div>
+      <div class="card"><h4>計測を意識したURL</h4><p>utm_campaign・utm_sourceが付与されており、流入元の分析に活かせる状態です。</p></div>
+      <div class="card"><h4>多様なコンテンツ形式</h4><p>漫画・動画・コラム・ホワイトペーパー・口コミと、読み手の関心に合わせた形式が揃っています。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="wrap">
+    <div class="sec-no">04</div>
+    <h2 class="sec-h">BtoB LINE運用のノウハウ</h2>
+    <p class="sec-lead">BtoC向けの「一斉配信・頻度」中心の運用とは異なり、<br>BtoBでは検討段階に合わせた情報提供が成果を左右します。</p>
+
+    <div class="grid g2">
+      <div class="card accent"><h4>1. 「誰に届けるか」を先に決める</h4><p>業種・役職・検討段階・流入元をタグにして分類します。無関係な一斉配信は、ブロックや通知オフ、通数コストの増加につながります。</p></div>
+      <div class="card accent"><h4>2. 友だち追加後の導線を設計する</h4><p>追加直後の挨拶から、数日おきに「資料→事例→セミナー→個別相談」と段階を踏むステップ配信が定番です。展示会では名刺・ブースのQRを流入経路として区別します。</p></div>
+      <div class="card accent"><h4>3. 1通1訴求・1行き先に絞る</h4><p>選ばせたい時はカードタイプ、一点を見せたい時はリッチメッセージと使い分けます。リンクを複数並べると、どれもタップされにくくなります。</p></div>
+      <div class="card accent"><h4>4. 回答フォームで「興味」を可視化する</h4><p>リッチメニューや回答フォームの選択結果を興味タグに反映し、関心のある方だけに詳細・商談案内を出します。</p></div>
+      <div class="card accent"><h4>5. 指標は開封より「商談につながったか」</h4><p>通数あたりの成果で判断します。クリック数に加え、体験予約・セミナー申込・商談化までを流入経路別に比較します。</p></div>
+      <div class="card accent"><h4>6. 配信頻度は「鮮度×関連性」で決める</h4><p>頻度そのものより、情報の新しさと受け手への合致度が重要とされています。時間帯や文面はA/Bテストで検証します。</p></div>
+    </div>
+    <div class="note">料金面では、2023年の料金改定以降、無料で送れる通数が限られるため、全員への一斉配信を絞る設計がコスト面でも有効です。具体的なプランと通数は、LINE公式の最新情報での確認をおすすめします。</div>
+    <p class="small">参考：ligla（配信・頻度に関する解説）／aurant technologies（BtoB LINE運用ガイド）／Lステップ公式ブログ（タグ・リッチメニュー・流入経路分析）／L Message（展示会でのLINE活用）。いずれも提供会社・支援会社の解説記事であり、数値は目安です。</p>
+  </div>
+</section>
+
+<section id="s5">
+  <div class="wrap">
+    <div class="sec-no">05</div>
+    <h2 class="sec-h">ノウハウと現状の照らし合わせ</h2>
+    <p class="sec-lead">4章のノウハウと配信履歴を比べ、さらに伸ばせる余地を整理しました。<br>「改善すべき点」ではなく、新商品告知に向けた<b>伸びしろ</b>として捉えています。</p>
+
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>観点</th><th>現状（履歴から）</th><th>伸ばせる方向</th><th>優先度</th></tr></thead>
+      <tbody>
+        <tr><td>配信対象の分け方</td><td>開業検討者・導入検討者・既存導入店が同じ配信を受けている可能性</td><td>属性・検討段階タグで出し分け。新商品は関心層から先に</td><td><span class="tag hi">高</span></td></tr>
+        <tr><td>新機器の告知設計</td><td>ルネピュールは5月・7月・10月の3回。予告〜事例の流れは都度の配信</td><td>予告・先行・発売・事例・振り返りの「型」を作り、毎回再利用</td><td><span class="tag hi">高</span></td></tr>
+        <tr><td>文面の長さ</td><td>200〜400字の長文が多く、ひと目で要点を拾いにくい箇所あり</td><td>1通1訴求。冒頭30字で要点、詳細はリンク先へ</td><td><span class="tag hi">高</span></td></tr>
+        <tr><td>同一内容の再配信</td><td>説明会案内を約5週間で6回、導入プラン解説を5回配信</td><td>再配信時は切り口・見出し・画像を変え、既に反応した方は除外</td><td><span class="tag">中</span></td></tr>
+        <tr><td>行き先（フォーム）</td><td>Googleフォーム、vivit、自社LPなど複数に分散</td><td>目的別に整理し、反応をタグで一元的に把握</td><td><span class="tag">中</span></td></tr>
+        <tr><td>反応の取りこぼし</td><td>個別問い合わせは自動応答で「次の配信までお待ちください」</td><td>電話・フォーム・「予約希望」など反応の入口を明示し、関心の瞬間を逃さない</td><td><span class="tag">中</span></td></tr>
+        <tr><td>表記の統一</td><td>曜日の表記（例：2026年5月28日を「金」と表記、実際は木曜）や、「3年連続」「5年連続」など実績表現に揺れ</td><td>日付・実績表現を配信前チェックリストで確認（根拠の併記も）</td><td><span class="tag hi">高</span></td></tr>
+        <tr><td>画像（推定）</td><td>文面は「画像をタップ」前提。画像内の文字量・サイズは未確認</td><td>画像は1訴求・短い見出し・大きめの文字で、サムネイルでも読める設計に</td><td><span class="tag">中</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="small">配信時刻（20時）は営業後の時間帯として定着しています。曜日・時間のA/Bテストで、さらに反応の良い枠を探せる可能性があります。</p>
+  </div>
+</section>
+
+<section id="s6">
+  <div class="wrap">
+    <div class="sec-no">06</div>
+    <h2 class="sec-h">新商品リリース告知の「型」（たたき台）</h2>
+    <p class="sec-lead">リリース日を基準に、5つの配信で「知る→関心→予約→信頼」へつなげる流れです。<br>日程・本数は商材や展示会の有無に合わせて調整します。</p>
+
+    <div class="flow tl">
+      <div class="st" data-t="リリース2週間前"><b>予告</b><span>「近日登場」で関心を喚起。回答フォームで興味を取得</span></div>
+      <div class="st" data-t="リリース1週間前"><b>先行案内</b><span>興味ありの方へ、体験・デモ予約を先行案内</span></div>
+      <div class="st" data-t="リリース日"><b>発表</b><span>1訴求・1画像で製品の魅力を発表。予約導線を1つに</span></div>
+      <div class="st" data-t="リリース3〜5日後"><b>活用イメージ</b><span>既存メニューとの組み合わせ、導入プラン、Q&amp;A</span></div>
+      <div class="st" data-t="リリース2週間後"><b>事例・声</b><span>体験者の声・症例（表現確認のうえ）で信頼を補強</span></div>
+    </div>
+
+    <h3>文面サンプル（発表日・イメージ）</h3>
+    <div class="phones">
+      <div class="phone">
+        <div class="bar">LINE トーク（発表日配信）</div>
+        <div class="bubble"><div class="img">画像イメージ<br>新商品名＋1行コピー＋製品画像</div>
+          <b>【新登場】Rene Pur 先行体験のご案内</b><br>
+          針を使わない水光ケアの体験会を開催します。<br>
+          ご予約は下の画像から。<br>
+          <span class="small">※数値・効能の表現は、貴社資料と薬機法・景表法の確認を経て確定します。</span></div>
+      </div>
+      <div class="card">
+        <h4>この文面のポイント</h4>
+        <ul style="margin:0;padding-left:1.2em">
+          <li>冒頭1行で「何が・いつ」を伝える</li>
+          <li>本文は3〜4行。詳細はリンク先へ</li>
+          <li>ボタン（行き先）は<span class="nb">1つ</span></li>
+          <li>「医療級」「リフトアップ」などは根拠・表現を確認してから採用</li>
+        </ul>
+        <div class="note warn" style="margin-top:16px">サンプルは型の説明用です。実際の文言は、貴社の製品情報・許諾範囲を確認のうえ作成します。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s7">
+  <div class="wrap">
+    <div class="sec-no">07</div>
+    <h2 class="sec-h">画像制作の方針</h2>
+    <p class="sec-lead">素材をご提供いただいたうえで、LINEのトーク画面で読み切れる画像に整えます。<br>製品画像は縦横比を保ち、切り抜きや歪みを加えずに使用します。</p>
+    <div class="grid g3">
+      <div class="card"><h4>1訴求・1メッセージ</h4><p>1枚につき訴えることは<span class="nb">1つ</span>。見出しは短く、大きめの文字で構成します。</p></div>
+      <div class="card"><h4>サムネイルで読める</h4><p>トーク一覧の小さな表示でも、商品名と要点が判別できる文字サイズにします。</p></div>
+      <div class="card"><h4>型で統一感を出す</h4><p>告知の5段階ごとにテンプレートを用意し、フォーム・文字色・余白をそろえます。</p></div>
+      <div class="card"><h4>形式の使い分け</h4><p>一点を見せる→リッチメッセージ／複数から選ばせる→カードタイプ。目的に応じて選びます。</p></div>
+      <div class="card"><h4>貴社ブランドとの整合</h4><p>公式サイトの緑・白を基調としたトーンを踏まえ、既存の世界観をそろえます。</p></div>
+      <div class="card"><h4>表現の事前確認</h4><p>薬機法・景表法に関わる表現は、チェックを通してから入稿します。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="s8">
+  <div class="wrap">
+    <div class="sec-no">08</div>
+    <h2 class="sec-h">お見積り（仮）</h2>
+    <p class="sec-lead">下記は企画書上の<b>仮の金額</b>です。契約期間・総枚数によりボリュームディスカウントを含め変動いたします。</p>
+
+    <div class="tbl-wrap price"><table>
+      <thead><tr><th>項目</th><th>内容</th><th>数量</th><th>単価（税抜）</th></tr></thead>
+      <tbody>
+        <tr><td>テキスト案出し＋作成</td><td>配信文面の案出しと作成</td><td>1件</td><td>¥3,000</td></tr>
+        <tr><td>画像制作（素材提供あり）</td><td>ご提供素材を用いた配信画像</td><td>1枚</td><td>¥5,000</td></tr>
+        <tr><td>CRMツール シナリオ設計／コンサル</td><td>タグ設計・シナリオ設計・運用相談</td><td>1か月</td><td>¥50,000</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">備考：① テキストと画像制作は<span class="nb">1枚</span>発注の場合の金額です。契約期間や総枚数によって、ボリュームディスカウントを含め金額が変動いたします。② LステップなどのCRMツールをお使いの場合、タグ設計やシナリオ制作までさせていただきます。</div>
+
+    <h3>試算イメージ（新商品リリース月・仮）</h3>
+    <div class="tbl-wrap price"><table>
+      <thead><tr><th>項目</th><th>内訳</th><th>金額（税抜）</th></tr></thead>
+      <tbody>
+        <tr><td>告知配信（5通分）</td><td>テキスト5件＋画像5枚</td><td>¥40,000</td></tr>
+        <tr><td>シナリオ設計／コンサル</td><td>1か月</td><td>¥50,000</td></tr>
+        <tr class="total"><td>合計（税抜）</td><td>消費税10%：¥9,000</td><td>¥90,000</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small">税込 ¥99,000。上記は本数・内容により調整します。</p>
+  </div>
+</section>
+
+<section id="s9">
+  <div class="wrap">
+    <div class="sec-no">09</div>
+    <h2 class="sec-h">運用コンサルのイメージ（Lステップ想定・仮案）</h2>
+    <p class="sec-lead">Lステップをご利用の想定で、新商品告知を軸にした設計のたたき台をまとめました。<br>実際の設定状況に合わせて、一緒に調整していく前提の「仮案」です。</p>
+
+    <h3>① タグ設計（仮案）</h3>
+    <div class="tbl-wrap lstep"><table>
+      <thead><tr><th>系統</th><th>タグ例</th><th>付与のタイミング</th></tr></thead>
+      <tbody>
+        <tr><td>属性</td><td><span class="tag">属性_既存導入店</span><span class="tag">属性_導入検討</span><span class="tag">属性_開業検討</span><span class="tag">業態_シミケア</span><span class="tag">業態_脱毛</span><span class="tag">業態_痩身</span></td><td>友だち追加時のアンケート／回答フォーム</td></tr>
+        <tr><td>流入経路</td><td><span class="tag">経路_BWJ東京</span><span class="tag">経路_BWJ大阪</span><span class="tag">経路_誌面QR</span><span class="tag">経路_Web</span><span class="tag">経路_名刺</span></td><td>QRコード・流入経路分析で自動付与</td></tr>
+        <tr><td>興味</td><td><span class="tag">興味_ルネピュール</span><span class="tag">興味_ピグデトックス</span><span class="tag">興味_冷却機器</span><span class="tag">興味_開業支援</span></td><td>リッチメニュー・回答フォーム・リンククリック</td></tr>
+        <tr><td>反応・段階</td><td><span class="tag">反応_動画視聴</span><span class="tag">反応_セミナー申込</span><span class="tag">反応_体験予約</span><span class="tag hi">商談_営業へ引継</span></td><td>フォーム送信・クリック・営業連携時</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small">友だち情報欄には「サロン名」「地域」「導入機器」「検討時期」を保存し、メッセージへの差し込みや絞り込み配信に使う想定です。</p>
+
+    <h3>② リッチメニュー（仮案）</h3>
+    <div class="phones">
+      <div class="phone">
+        <div class="bar">リッチメニュー（常設・6分割イメージ）</div>
+        <div class="rm">
+          <div>新商品の<br>ご案内</div><div>機器体験<br>予約</div><div>セミナー<br>日程</div>
+          <div>導入事例</div><div>資料<br>ダウンロード</div><div>お問い合わせ<br>（電話・フォーム）</div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>設計の狙い</h4>
+        <ul style="margin:0;padding-left:1.2em">
+          <li>「新商品のご案内」はリリース期間のみ、専用タブに切り替え</li>
+          <li>各ボタンのタップ＝興味タグの付与につなげる</li>
+          <li>電話・フォームを常設し、反応の入口を明確に</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>③ シナリオ（仮案）：新商品告知の流れ</h3>
+    <div class="flow">
+      <div class="st"><b>予告配信</b><span>全体へ。興味アンケート（1分）を同時に送付</span></div>
+      <div class="st"><b>興味タグ付与</b><span>回答内容に応じて「興味_○○」を自動付与</span></div>
+      <div class="st"><b>絞り込み配信</b><span>興味タグの方へ先行案内・体験予約</span></div>
+      <div class="st"><b>反応別フォロー</b><span>未反応には3日後に別切り口で再配信</span></div>
+      <div class="st"><b>営業連携</b><span>体験予約タグで担当へ通知し、商談へ</span></div>
+    </div>
+
+    <h3>④ 見る指標（KPI案）</h3>
+    <div class="grid g3">
+      <div class="card"><h4>配信の質</h4><p>クリック率、ブロック率、配信時間帯別の反応</p></div>
+      <div class="card"><h4>興味の把握</h4><p>興味タグ付与数、アンケート回答率、製品別の関心度</p></div>
+      <div class="card"><h4>成果</h4><p>体験予約数、セミナー申込数、流入経路別の商談化</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="s10">
+  <div class="wrap">
+    <div class="sec-no">10</div>
+    <h2 class="sec-h">進め方とスケジュール（案）</h2>
+    <p class="sec-lead">まずは新商品1件を題材に、小さく始めて型を作る進め方をご提案します。</p>
+    <div class="flow">
+      <div class="st"><b>キックオフ</b><span>対象製品・告知日程・素材のご確認、現行タグの棚卸し</span></div>
+      <div class="st"><b>設計</b><span>告知の型・タグ・メニューの方針決定（約1〜2週間）</span></div>
+      <div class="st"><b>制作</b><span>テキスト・画像の制作、貴社でのご確認・表現チェック</span></div>
+      <div class="st"><b>配信・運用</b><span>配信後の反応を確認し、次回に向けて調整</span></div>
+      <div class="st"><b>振り返り</b><span>指標の確認と、次の告知への改善提案</span></div>
+    </div>
+    <div class="note">ご確認いただきたいこと：① 現在お使いのCRMツール・プランと管理権限　② 直近のリリース予定製品と告知希望日　③ ご提供可能な画像素材・資料　④ 貴社側の表現確認フロー</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>株式会社新東通信　東京本社 エステティック通信チーム</b><br>
+    エステティック通信（2004年創刊／発行部数20,000部・月／読者の約90%が決裁権者）</p>
+    <p class="small" style="color:#cfe3cc">本書の金額は仮のものであり、確定のお見積りは別途ご提示いたします。</p>
+  </div>
+</footer>
+
+</body>
+</html>
